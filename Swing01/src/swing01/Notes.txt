@@ -1,0 +1,37 @@
+
+GESTIONNAIRE DE PLACEMENT ?
+
+sur un composant est un autre objet 
+qui lui a pour tâche de dicter la façon 
+dont les élements qui sont dans un contenu 
+de disposer sur l'écran.
+
+FlowLayout est le gestionnaire par défault des objets JPanel
+
+
+
+GESTIONNAIRES D'EVENEMENTS
+
+quand on clique sur un element d'interface graphique(button, panel..), auprès du quel 
+les objets vont s'enregistrer pour écouter les différents évenements et réagit en fonction.
+en gros dans swing, on ne réagit pas que si on clique sur un bouton, qu'est ce qui va se passer ? 
+non , on dit plutot si on clique ou si on fait quelque chose , on dit à qui et 
+c'est lorsque on dit à la personne(objets) il saura quoi faire ...
+
+on a : évenements produit ; intercepteur d'évenement, 
+et le gestionnaire d'évement(celui qui doit traiter l'évenement produit)
+
+INTERCEPTEURS D'EVENEMENTS: ecouteur et adaptateur
+
+écouteur: sont ces objetcs qui peuvent écouter les évenements, pour qu'un objet 
+puisse écouter un évenement, 
+il faut qu'il implémente une interface spécifique lui permettant d'écouter ce évenement là et il faut s'enregistrer auprès de ce évenement là.
+
+adaptateur; est un écouteur qui a déjà fournit une implémentation par défaut à 
+tous les méthodes. donc c'est une classe abstraite qui nous permettra d'implémenter
+ la méthode que nous voulons.
+
+
+si l'écouteur à une seule méthode, on a plus besoin d'adaptateur
+
+une interface qui nous propose une seule méthode abstraite est une interface fonctionnelle
