@@ -33,12 +33,27 @@ public class Case {
         }
     }
     public void devoiler(){
+        this.partie.demarrer(this);
         if(this.etat == EtatCaseEnum.INITIAL){
             this.etat = EtatCaseEnum.DEVOILE;
+            
+            if(this.minee){
+                this.partie.terminerAvecEchec();
+                return ;
+            }
             this.devoilerVoisines();
             
         }
     }
+    
+    public boolean isDevoilee(){
+        return this.etat == EtatCaseEnum.DEVOILE;
+    }
+    
+    public boolean isMarquee(){
+        return this.etat == EtatCaseEnum.MARQUEE;
+    }
+    
     public String getContenu(){
          List<Case> voisines = this.getVoisines();
          int nombreMines = this.getNombreMines(voisines);
@@ -109,8 +124,6 @@ public class Case {
         int nombreColonnes = this.partie.getNiveau().getNombreColonnes();
         int position = this.partie.getCases().indexOf(this);
         return position % nombreColonnes;
-        
-        
     }
     
     
@@ -137,6 +150,9 @@ public class Case {
 
     public EtatCaseEnum getEtat() {
         return etat;
+    }
+    public void setEtat(EtatCaseEnum etat) {
+        this.etat = etat;
     }
     
     

@@ -7,6 +7,7 @@ package metier;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -20,15 +21,18 @@ public class Partie {
     private boolean gagnee = false;
     
     
+    
     private List<Case> cases = new ArrayList();
     
     private Minuteur miniteur;
     private CompteurMine compteurMine;
     private Niveau niveau;
+    private EtatJeuEnum etat;
     
     public Partie(Niveau niveau){
         
         this.niveau = niveau;
+        this.etat = EtatJeuEnum.ATTENTE;
         int nombreCases = niveau.getNombreCases(); //ici on vient de récupérer le nombre de case
         
         for (int i=0; i< nombreCases; i++){
@@ -46,10 +50,46 @@ public class Partie {
         int position = ligne * nombreColonnes + colonne;
         
         if(position < 0 || position>= this.niveau.getNombreCases()){
-        throw new Exception("Coordonnées invalides");
+            throw new Exception("Coordonnées invalides");
             
         }
         return this.cases.get(position);
+    }
+    
+    public void demarrer(Case premiereCase){
+        if(this.etat == EtatJeuEnum.ATTENTE){
+            this.etat = EtatJeuEnum.ENCOURS;
+            this.setMines(premiereCase);
+        }
+    }
+    
+    public void setMines(Case caseExceptee){
+        int nombresMines = this.niveau.getNombreMines();
+        int nombresCases = this.niveau.getNombreCases();
+        
+        int conteur = 0;
+        Random random = new Random();
+        while (conteur < nombresMines){
+            int position = random.nextInt(nombresCases);
+            
+            Case _case = this.cases.get(position);
+            
+            if(!_case.isMinee() && _case != caseExceptee){//je viens de changer == a != si le provient survient apres je vais modifier 
+                _case.setMine();
+                conteur ++;
+            }
+        }
+    }
+    public void terminerAvecEchec(){
+        this.etat = EtatJeuEnum.TERMINEE;
+        this.toutDevoiler();
+        
+    }
+    
+    public void toutDevoiler(){
+        for (Case _case: cases){
+            _case.devoiler();
+        }
     }
 
     public LocalDate getHeureDebut() {

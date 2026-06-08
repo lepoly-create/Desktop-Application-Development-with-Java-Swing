@@ -30,9 +30,12 @@ public class EcouteurCaseUI extends MouseAdapter {
         /*comment savoir si cest un clic droit ou un clic gauche c'est a ce probleme on va résourdre*/
         if (SwingUtilities.isRightMouseButton(e)){
             caseUI.getCaseMetier().marquer();
+            caseUI.afficher();
         }
         if (SwingUtilities.isLeftMouseButton(e)){
             caseUI.getCaseMetier().devoiler();
+            caseUI.getPlateau().afficher();
+            
         }
     }
     

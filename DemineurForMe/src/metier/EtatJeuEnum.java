@@ -8,10 +8,11 @@ package metier;
  *
  * @author DELL
  */
-public class EtatCaseEnum {
+public enum EtatJeuEnum {
     
-    INITIAL,
-    MARQUE,
-    DEVOILE;
+    ATTENTE,
+    ENCOURS,
+    ENPAUSE,
+    TERMINEE
     
 }
