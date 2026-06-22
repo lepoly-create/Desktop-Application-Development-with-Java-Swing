@@ -12,33 +12,40 @@ import javax.swing.SwingUtilities;
  *
  * @author DELL
  */
-/*MouseAdapter est une classe abstraite pas une interface , 
-donc ova redefinir la methode MouseClicked*/
+/*
+ * MouseAdapter est une classe abstraite pas une interface ,
+ * donc ova redefinir la methode MouseClicked
+ */
 public class EcouteurCaseUI extends MouseAdapter {
-    
+
     @Override
-    public void mouseClicked(MouseEvent e){
-        /*puisque chaque bouteur a un écouteur, 
-        donc on va recuper celui qui est  l'origine de son evenement, 
-        recuperer l'objet qui a ete a la source de l'evenement*/
-        /*il faut faire un cast pour transformer lobjet*/
+    public void mouseClicked(MouseEvent e) {
+        /*
+         * puisque chaque bouteur a un écouteur,
+         * donc on va recuper celui qui est l'origine de son evenement,
+         * recuperer l'objet qui a ete a la source de l'evenement
+         */
+        /* il faut faire un cast pour transformer lobjet */
         CaseUI caseUI = (CaseUI) e.getSource();
-        
-        /*autre facon de faire est dobtenir la position de l'objet 
-        qui est un peu difficiel a faire*/
-        
-        /*comment savoir si cest un clic droit ou un clic gauche c'est a ce probleme on va résourdre*/
-        if (SwingUtilities.isRightMouseButton(e)){
+
+        /*
+         * autre facon de faire est dobtenir la position de l'objet
+         * qui est un peu difficiel a faire
+         */
+
+        /*
+         * comment savoir si cest un clic droit ou un clic gauche c'est a ce probleme on
+         * va résourdre
+         */
+        if (SwingUtilities.isRightMouseButton(e)) {
             caseUI.getCaseMetier().marquer();
             caseUI.afficher();
         }
-        if (SwingUtilities.isLeftMouseButton(e)){
+        if (SwingUtilities.isLeftMouseButton(e)) {
             caseUI.getCaseMetier().devoiler();
             caseUI.getPlateau().afficher();
-            
+
         }
     }
-    
-    
-    
+
 }

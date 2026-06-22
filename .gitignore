@@ -24,3 +24,7 @@ hs_err_pid*
 replay_pid*
 /first_app/target/
 /Java_Swing/target/
+/jdbc1/nbproject/private/
+/jdbc1/build/
+/jdbc1/dist/
+/HopitalIMS/nbproject/private/
