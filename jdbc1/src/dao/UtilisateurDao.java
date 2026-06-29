@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import entite.Utilisateur;
+import java.sql.ResultSet;
+import util.ObjetNonTrouveException;
 
 /**
  *
@@ -40,8 +42,27 @@ public class UtilisateurDao {
         
     }
     
-    public Utilisateur trouver(int id){
-        return null;
+    public Utilisateur trouver(int id) throws ObjetNonTrouveException, SQLException{
+        String sql = "SELECT * FROM utilisateurs WHERE id = ?";
+        try {
+            PreparedStatement etat = connexion.prepareStatement(sql);
+            etat.setInt(1, id);
+            ResultSet resultat = etat.executeQuery() ;
+            
+            if (resultat.next()){
+                Utilisateur  utilisateur = new Utilisateur();
+                utilisateur.setId(resultat.getInt(1));
+                utilisateur.setIdentifiant(resultat.getString(2));
+                
+                return utilisateur;
+                
+            }else{
+                throw new ObjetNonTrouveException("Utilisateur de id = " + String.valueOf(id) + "non trouvé");
+            }
+        } catch (SQLException ex) {
+            throw ex;
+        }
+//        return null ;
         
     }
     public Utilisateur trouver(String identifiant){
@@ -49,7 +70,28 @@ public class UtilisateurDao {
     }
     
     public Utilisateur modifier(Utilisateur utilisateur){
-        return null;
+        String sql = "UPDATE utilisateurs SET identifiant = ?,"
+                + " mot_de_passe = ?"
+                + " WHERE id = ?";
+        
+        try {
+            PreparedStatement etat = connexion.prepareStatement(sql);
+            etat.setString(1, utilisateur.getIdentifiant());
+            etat.setString(2, utilisateur.getMotDePasse());
+            etat.setInt(3, utilisateur.getId());
+            
+            etat.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        try {
+            return this.trouver(utilisateur.getId());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+        
     }
     
     public List<Utilisateur> lister(){
@@ -57,6 +99,7 @@ public class UtilisateurDao {
     }
     
     public void supprimer(Utilisateur utilisateur){
+        
     }
     public void supprimer(int id){
     }

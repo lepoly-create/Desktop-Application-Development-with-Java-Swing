@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement ;
 import java.sql.PreparedStatement ;
 import java.sql.ResultSet ;
-import presentation.UtilisateurUI;
+import presentation.controleur.UtilisateurControleur;
 
 /**
  *
@@ -32,8 +32,9 @@ public class Main {
 //            Utilisateur utilisateurTrouve = trouver("user1");
 //            System.out.println(utilisateurTrouve);
 
-            UtilisateurUI utilisateurUI = new UtilisateurUI();
-            utilisateurUI.setVisible(true);
+            UtilisateurControleur utilisateurControleur = new UtilisateurControleur();
+            //utilisateurControleur.ajouter();
+            utilisateurControleur.modifier(30);
     }
     
 private static void connexionUtilisateurV3(){
